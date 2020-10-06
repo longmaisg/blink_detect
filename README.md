@@ -7,5 +7,5 @@ Require library: cv2, tkinter, cmake, dlib.
 Install the libraries by the following command:
 pip install opencv-contrib-python, 
 (optional) pip install tkinter,
-pip install cmake,
+pip install cmake (you may need to install Visual Studio for C++ to work with it),
 pip install dlib
