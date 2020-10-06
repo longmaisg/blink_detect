@@ -10,10 +10,10 @@ Install the libraries by the following command:
 ```
 pip install opencv-contrib-python
 ```
-Optional
+Optional:
 
 ```
 pip install tkinter
-pip install cmake
+pip install cmake (you may need Visual Studio for C++ to work with it)
 pip install dlib
 ```
