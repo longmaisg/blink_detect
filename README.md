@@ -8,6 +8,7 @@ Require library: cv2, tkinter, cmake, dlib, playsound
 Install the libraries by the following command:
 
 ```
+pip install -U numpy (in order to install the lastest numpy)
 pip install opencv-contrib-python
 pip install playsound
 ```
