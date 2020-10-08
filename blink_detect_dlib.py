@@ -5,15 +5,19 @@ import dlib
 import math
 import numpy as np
 import time
+import os
+import sys
 import random
 import datetime
 import threading
 import tkinter as tk
 from tkinter import messagebox
+import playsound
 
 
 BLINK_RATIO_THRESHOLD = 5.7
 MINIMUM_BLINK_PERIOD = 5    # seconds
+IS_TURN_OF_SCREEN = True
 SCREEN_OFF_PERIOD = 3       # seconds
 
 
@@ -49,19 +53,41 @@ def get_blink_ratio(eye_points, facial_landmarks):
 
 # this function makes a notification when not enough blinks
 def turn_off_screen():
-    root = tk.Tk()
-    root.attributes("-fullscreen", True)
-    root.configure(background='black')
-    # put the frame on top of other
-    root.call('wm', 'attributes', '.', '-topmost', True)
 
-    # add text to remind blinking
-    label = tk.Label(root, text="BLINK NOW!", font=("Verdana", 100), background='black', foreground='white')
-    # label.place(x=root.winfo_width() // 2, y=root.winfo_height() // 2, anchor="center")
-    label.pack()
+    if IS_TURN_OF_SCREEN:
+        # make a cover of the screen
+        try:
+            root = tk.Tk()
+            root.attributes("-fullscreen", True)
+            root.configure(background='black')
+            # put the frame on top of other
+            root.call('wm', 'attributes', '.', '-topmost', True)
 
-    root.after(SCREEN_OFF_PERIOD * 1000, root.destroy)
-    root.mainloop()
+            # add text to remind blinking
+            label = tk.Label(root, text="BLINK NOW!", font=("Verdana", 100), background='black', foreground='white')
+            # label.place(x=root.winfo_width() // 2, y=root.winfo_height() // 2, anchor="center")
+            label.pack()
+
+            root.after(SCREEN_OFF_PERIOD * 1000, root.destroy)
+            root.mainloop()
+            return
+        except():
+            print("tkinter does not work")
+
+    else:
+        # make a beep sound on Mac
+        try:
+            playsound.playsound('beep.mp3', False)
+            return
+        except():
+            print("beep sound does not work")
+
+        # make a beep sound on Mac
+        try:
+            print('\a')
+            return
+        except():
+            print("beep sound does not work")
 
 
 # livestream from the webcam
